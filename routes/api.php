@@ -1,11 +1,8 @@
 <?php
-// Inside routes/api.php
+//api.php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\HealthCheck\GetHealthCheckController;
 
-// Fetch all users
-Route::get('/users', [UserController::class, 'index']);
+Route::get("/api/health-check", GetHealthCheckController::class);
 
-// Create a new user
-Route::post('/users', [UserController::class, 'store']);
