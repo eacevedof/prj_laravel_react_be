@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Modules\Users\Domain\Entities\UserEntity;
 use Illuminate\Database\Seeder;
+use App\Modules\Users\Domain\Entities\UserEntity;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
