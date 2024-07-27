@@ -11,7 +11,7 @@ final readonly class CreatedUserDto
 
     }
 
-    public function fromPrimitives(array $primitives): self
+    public static function fromPrimitives(array $primitives): self
     {
         return new self($primitives);
     }
