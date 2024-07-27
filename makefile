@@ -11,3 +11,7 @@ help: ## Show this help message
 gitpush: ## git push m=any message
 	clear;
 	git add .; git commit -m "$(m)"; git push;
+
+pint: ## formatea el codigo
+	clear;
+	docker exec -it cont-lr-apache sh -c "cd /var/www/lr-app; composer pint"
