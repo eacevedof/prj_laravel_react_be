@@ -21,7 +21,8 @@ final readonly class CreateUserController
 
     public function __invoke(Request $httpRequest): JsonResponse
     {
-        $createUserDto = CreateUserDto::fromPrimitives($httpRequest->all());
+        //dd("hola");
+        $createUserDto = CreateUserDto::fromHttpRequest($httpRequest);
         $this->createUserService->__invoke($createUserDto);
         return $this->getJsonResponse([], 201);
     }

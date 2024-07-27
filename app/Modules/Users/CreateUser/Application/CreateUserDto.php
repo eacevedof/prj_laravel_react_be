@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Users\CreateUser\Application;
 
 use App\Modules\Shared\Domain\Enums\PlatformEnum;
+use Illuminate\Http\Request;;
 
 final readonly class CreateUserDto
 {
@@ -20,20 +21,35 @@ final readonly class CreateUserDto
 
     public function __construct(array $primitives)
     {
-        $this->createdPlatform = trim((string) ($primitives['createdPlatform'] ?? PlatformEnum::UNKNOWN));
-        $this->createdBy = trim((string) ($primitives['createdBy'] ?? ""));
-        $this->createdAt = trim((string) ($primitives['createdAt'] ?? ""));
-        $this->username = trim((string) ($primitives['username'] ?? ""));
-        $this->secretPwd = trim((string) ($primitives['secretPwd'] ?? ""));
-        $this->secretPwdRepeat = trim((string) ($primitives['secretPwdRepeat'] ?? ""));
-        $this->email = trim((string) ($primitives['email'] ?? ""));
-        $this->firstName = trim((string) ($primitives['firstName'] ?? ""));
-        $this->firstSurname = trim((string) ($primitives['firstSurname'] ?? ""));
+        $this->createdPlatform = trim((string) ($primitives["createdPlatform"] ?? PlatformEnum::UNKNOWN->value));
+        $this->createdBy = trim((string) ($primitives["createdBy"] ?? ""));
+        $this->createdAt = trim((string) ($primitives["createdAt"] ?? ""));
+        $this->username = trim((string) ($primitives["username"] ?? ""));
+        $this->secretPwd = trim((string) ($primitives["secretPwd"] ?? ""));
+        $this->secretPwdRepeat = trim((string) ($primitives["secretPwdRepeat"] ?? ""));
+        $this->email = trim((string) ($primitives["email"] ?? ""));
+        $this->firstName = trim((string) ($primitives["firstName"] ?? ""));
+        $this->firstSurname = trim((string) ($primitives["firstSurname"] ?? ""));
     }
 
     public static function fromPrimitives(array $primitives): self
     {
         return new self($primitives);
+    }
+
+    public static function fromHttpRequest(Request $request): self
+    {
+        return new self([
+            "createdPlatform" => $request->input("createdPlatform"),
+            "createdBy" => $request->input("createdBy"),
+            "createdAt" => $request->input("createdAt"),
+            "username" => $request->input("username"),
+            "secretPwd" => $request->input("secretPwd"),
+            "secretPwdRepeat" => $request->input("secretPwdRepeat"),
+            "email" => $request->input("email"),
+            "firstName" => $request->input("firstName"),
+            "firstSurname" => $request->input("firstSurname"),
+        ]);
     }
 
     public function createdPlatform(): string
