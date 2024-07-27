@@ -10,7 +10,6 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create("sys_user", function (Blueprint $table): void {
-            $table->id();
             $table->string("created_platform", 3)->nullable();
             $table->string("created_by", 10)->nullable();
             $table->dateTime("created_at") ->nullable();
@@ -23,8 +22,11 @@ return new class () extends Migration {
             $table->string("deleted_by", 10)->nullable();
             $table->dateTime("deleted_at") ->nullable();
 
+            $table->tinyInteger("is_enabled") ->nullable(false)->default(0);
+
+            $table->id();
             $table->string("uuid", 50)->unique();
-            $table->string("username", 50)->unique();
+            $table->string("username", 50)->unique()->nullable(false);
             $table->string("secret_pwd", 100);
             $table->string("secret_pwd_reset")->unique()->nullable();
 
