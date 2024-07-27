@@ -7,7 +7,7 @@ namespace App\Modules\Users\CreateUser\Application;
 final readonly class CreateUserService
 {
     public function __construct(
-
+        private CreateUseWriterRepository $createUseWriterRepository
     ) {
 
     }

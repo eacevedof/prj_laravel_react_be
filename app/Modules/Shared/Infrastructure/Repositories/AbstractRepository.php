@@ -18,4 +18,34 @@ abstract class AbstractRepository
         return DB::table($table);
     }
 
+    protected function getIntegersSqlIn(array $entityIds): string
+    {
+        if (!$entityIds) return "";
+        $entityIds = array_unique($entityIds);
+        $entityIds = array_map(fn ($id) => (int) $id, $entityIds);
+        sort($entityIds);
+        return implode(", ", $entityIds);
+    }
+
+    protected function getStringsSqlIn(array $entityUuids): string
+    {
+        if (!$entityUuids) return "";
+        $entityUuids = array_unique($entityUuids);
+        $entityUuids = array_map(fn ($uuid) => $this->getEscapedSqlString($uuid), $entityUuids);
+        sort($entityUuids);
+        return "'" . implode("', '", $entityUuids) . "'";
+    }
+
+    protected function getEscapedSqlString(string $string): string
+    {
+        return str_replace("'", "''", $string);
+    }
+
+    protected function mapColumnToInt(array &$objects, string $column): self
+    {
+        foreach ($objects as $obj)
+            $obj->{$column} = (int) $obj->{$column};
+        return $this;
+    }
+
 }
