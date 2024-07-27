@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-//api.php
+//api-routes.php
 
 use App\Http\Controllers\HealthCheck\GetHealthCheckController;
 use Illuminate\Support\Facades\Route;
