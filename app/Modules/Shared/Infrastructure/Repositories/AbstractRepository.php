@@ -20,7 +20,9 @@ abstract class AbstractRepository
 
     protected function getIntegersSqlIn(array $entityIds): string
     {
-        if (!$entityIds) return "";
+        if ( ! $entityIds) {
+            return "";
+        }
         $entityIds = array_unique($entityIds);
         $entityIds = array_map(fn ($id) => (int) $id, $entityIds);
         sort($entityIds);
@@ -29,7 +31,9 @@ abstract class AbstractRepository
 
     protected function getStringsSqlIn(array $entityUuids): string
     {
-        if (!$entityUuids) return "";
+        if ( ! $entityUuids) {
+            return "";
+        }
         $entityUuids = array_unique($entityUuids);
         $entityUuids = array_map(fn ($uuid) => $this->getEscapedSqlString($uuid), $entityUuids);
         sort($entityUuids);
@@ -43,8 +47,9 @@ abstract class AbstractRepository
 
     protected function mapColumnToInt(array &$objects, string $column): self
     {
-        foreach ($objects as $obj)
+        foreach ($objects as $obj) {
             $obj->{$column} = (int) $obj->{$column};
+        }
         return $this;
     }
 
