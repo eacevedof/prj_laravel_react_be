@@ -28,7 +28,7 @@ return new class () extends Migration {
             $table->string("secret_pwd", 100);
             $table->string("secret_pwd_reset")->unique()->nullable();
 
-            $table->timestamp("email_verified_at")->nullable();
+            $table->timestamp("verified_at")->nullable();
         });
 
         Schema::create("app_user", function (Blueprint $table): void {
