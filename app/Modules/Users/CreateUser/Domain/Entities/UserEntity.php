@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Users\Domain\Entities;
+namespace App\Modules\Users\CreateUser\Domain\Entities;
 
 final class UserEntity
 {

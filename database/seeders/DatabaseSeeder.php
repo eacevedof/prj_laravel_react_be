@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Modules\Users\Domain\Entities\UserEntity;
+use App\Modules\Users\CreateUser\Domain\Entities\UserEntity;
 use Illuminate\Database\Seeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
