@@ -19,7 +19,7 @@ yarn-error.log
 /.idea
 /.vscode
 
-/bootstrap/cache
+/bootstrap/cache/*
 /storage/framework/cache
 /storage/framework/sessions
 /storage/framework/testing
