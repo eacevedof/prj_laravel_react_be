@@ -39,6 +39,7 @@ return new class () extends Migration {
             $table->integer("sys_user_id")->unsigned();
 
             $table->string("email", 100)->nullable();
+            $table->string("mobile_number", 100)->nullable();
             $table->string("middle_name", 50)->nullable();
             $table->string("second_surname", 50)->nullable();
         });
@@ -46,6 +47,7 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists("base_user");
+        Schema::dropIfExists("sys_user");
+        Schema::dropIfExists("app_user");
     }
 };
