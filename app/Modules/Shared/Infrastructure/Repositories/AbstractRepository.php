@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 final class AbstractRepository
 {
-    protected function query(string $sql): array
+    private function query(string $sql): array
     {
         return DB::select($sql);
     }
 
-    protected function command(string $table): object
+    private function command(string $table): object
     {
         return DB::table($table);
     }

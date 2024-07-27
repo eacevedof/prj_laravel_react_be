@@ -6,5 +6,4 @@ namespace App\Modules\Users\CreateUser\Domain\Entities;
 
 final class UserEntity
 {
-
 }
