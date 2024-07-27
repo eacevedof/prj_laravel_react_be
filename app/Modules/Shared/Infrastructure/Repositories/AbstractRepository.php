@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Shared\Infrastructure;
+namespace App\Modules\Shared\Infrastructure\Repositories;
 
 use Illuminate\Support\Facades\DB;
 
