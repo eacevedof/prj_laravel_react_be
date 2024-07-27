@@ -11,5 +11,5 @@ use App\Modules\Users\CreateUser\Infrastructure\CreateUserController;
 Route::get("/health-check", GetHealthCheckController::class);
 
 //users
-Route::post("/users/create-user", CreateUserController::class);
+Route::post("/v1/users/create-user", CreateUserController::class);
 
