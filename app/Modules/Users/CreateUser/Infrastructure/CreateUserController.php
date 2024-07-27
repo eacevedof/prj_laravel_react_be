@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Modules\Users\CreateUser\Infrastructure;
 
+use App\Modules\Shared\Infrastructure\Traits\JsonResponseTrait;
 use App\Modules\Users\CreateUser\Application\CreateUserDto;
 use App\Modules\Users\CreateUser\Application\CreateUserService;
-use Illuminate\Http\Request;
-use App\Modules\Shared\Infrastructure\Traits\JsonResponseTrait;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final readonly class CreateUserController
 {

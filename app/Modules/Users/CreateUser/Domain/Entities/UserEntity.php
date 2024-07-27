@@ -8,5 +8,4 @@ use App\Modules\Shared\Domain\Aggregate\AbstractAggregateRoot;
 
 final class UserEntity extends AbstractAggregateRoot
 {
-
 }
