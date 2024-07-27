@@ -29,6 +29,7 @@ return new class () extends Migration {
             $table->string("username", 50)->unique()->nullable(false);
             $table->string("secret_pwd", 100);
             $table->string("secret_pwd_reset")->unique()->nullable();
+            $table->string("email", 100)->nullable();
 
             $table->timestamp("verified_at")->nullable();
         });
@@ -36,9 +37,8 @@ return new class () extends Migration {
         Schema::create("app_user", function (Blueprint $table): void {
             $table->id();
 
-            $table->integer("sys_user_id")->unsigned();
+            $table->integer("sys_user_id")->unsigned()->unique()->nullable(false);
 
-            $table->string("email", 100)->nullable();
             $table->string("first_name", 50)->nullable();
             $table->string("first_surname", 50)->nullable();
             $table->string("mobile_number", 100)->nullable();
