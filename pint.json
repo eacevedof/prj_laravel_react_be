@@ -1,5 +1,5 @@
 {
-    "preset": "per",
+    "preset": "psr12",
     "rules": {
         "single_quote": false,
         "align_multiline_comment": true,
