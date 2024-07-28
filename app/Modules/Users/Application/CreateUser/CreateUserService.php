@@ -68,7 +68,6 @@ final readonly class CreateUserService
 
     }
 
-
     private function createUserOrFail(): void
     {
         $this->userUuid = Uuid::getUuidWithPrefix(UuidPrefixEnum::USER->value);

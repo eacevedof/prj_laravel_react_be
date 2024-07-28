@@ -10,14 +10,15 @@ final class Matcher
 {
     public static function doesStringMatchPattern(string $string, string $pattern): bool
     {
-        return 1 === preg_match($pattern, "/{$string}/");
+        return 1 === preg_match("/{$pattern}/", $string);
     }
 
     public static function doesStringMatchValidationPattern(
         string $string,
-        ValidatePatternEnum $validationPatternEnum
-    ): bool {
-        return self::doesStringMatchPattern($string, $validationPatternEnum->value);
+        ValidatePatternEnum $validatePatternEnum
+    ): bool
+    {
+        return self::doesStringMatchPattern($string, $validatePatternEnum->value);
     }
 
 }
