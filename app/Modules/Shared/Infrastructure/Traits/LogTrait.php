@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Shared\Infrastructure\Traits;
 
 use Illuminate\Support\Facades\Log;
-use PHPUnit\Event\Code\Throwable;
+use \Throwable;
 
 trait LogTrait
 {
@@ -43,8 +43,8 @@ trait LogTrait
         if ($title) {
             $content[] = $title;
         }
-        $content[] = $throwable->message();
-        $content[] = $throwable->stackTrace();
+        $content[] = $throwable->getMessage();
+        $content[] = $throwable->getTraceAsString();
         Log::channel("error")->debug(implode("\n", $content));
     }
 
