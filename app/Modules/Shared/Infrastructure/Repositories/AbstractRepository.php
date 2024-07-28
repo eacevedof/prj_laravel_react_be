@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Modules\Shared\Infrastructure\Repositories;
 
 use Illuminate\Support\Facades\DB;
+use App\Modules\Shared\Infrastructure\Traits\LogTrait;
 
 abstract class AbstractRepository
 {
+    use LogTrait;
+
     protected ?int $lastId = null;
 
     public function getDatetimeNow(): string
@@ -59,4 +62,8 @@ abstract class AbstractRepository
         return $this;
     }
 
+    protected function logSql(string $sql, string $title=""): void
+    {
+        $this->logSql($sql, $title);
+    }
 }

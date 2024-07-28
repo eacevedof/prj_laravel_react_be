@@ -8,6 +8,7 @@ use App\Modules\Shared\Infrastructure\Repositories\AbstractRepository;
 
 final class SysUserReaderRepository extends AbstractRepository
 {
+
     public function getUserIdByUsername(string $username): ?int
     {
         $sql = "
@@ -17,6 +18,7 @@ final class SysUserReaderRepository extends AbstractRepository
         WHERE 1
         AND username = '{$username}'
         ";
+        $this->logSql($sql);
         if (! $result = $this->query($sql)) {
             return null;
         }
@@ -32,6 +34,7 @@ final class SysUserReaderRepository extends AbstractRepository
         WHERE 1
         AND uuid = '{$userUuid}'
         ";
+        $this->logSql($sql);
         if (!$result = $this->query($sql)) {
             return null;
         }
