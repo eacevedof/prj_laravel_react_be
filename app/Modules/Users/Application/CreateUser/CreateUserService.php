@@ -6,6 +6,7 @@ namespace App\Modules\Users\Application\CreateUser;
 
 use App\Modules\Shared\Domain\Enums\UuidPrefixEnum;
 use App\Modules\Shared\Infrastructure\Components\Hasher;
+use App\Modules\Shared\Infrastructure\Components\Time;
 use App\Modules\Shared\Infrastructure\Components\Uuid;
 use App\Modules\Users\Domain\Entities\UserEntity;
 use App\Modules\Users\Domain\Enums\UserEnabledEnum;
@@ -15,6 +16,7 @@ use App\Modules\Users\Infrastructure\Repositories\SysUserReaderRepository;
 
 final readonly class CreateUserService
 {
+    private string $userUuid;
     private CreateUserDto $createUserDto;
     public function __construct(
         private SysUserReaderRepository $sysUserReaderRepository,
@@ -22,13 +24,14 @@ final readonly class CreateUserService
     ) {
     }
 
-    public function __invoke(
-        CreateUserDto $createUserDto
-    ): CreatedUserDto {
+    public function __invoke(CreateUserDto $createUserDto): CreatedUserDto
+    {
         $this->createUserDto = $createUserDto;
-        $this->failIfWrongDto();
 
-        return CreatedUserDto::fromPrimitives([]);
+        $this->failIfWrongDto();
+        $this->createUserOrFail();
+
+        return $this->getCreatedUserDto();
     }
 
     private function failIfWrongDto(): void
@@ -38,15 +41,16 @@ final readonly class CreateUserService
         }
     }
 
-    private function createUser(): void
+    private function createUserOrFail(): void
     {
+        $this->userUuid = Uuid::getUuidWithPrefix(UuidPrefixEnum::USER->value);
         $userEntity = UserEntity::fromPrimitives([
             "createdPlatform" => $this->createUserDto->createdPlatform(),
             "createdBy" => $this->createUserDto->createdBy(),
-            "createdAt" => null,
+            "createdAt" => Time::now(),
 
             "isEnabled" => UserEnabledEnum::DISABLED->value,
-            "uuid" => Uuid::getUuidWithPrefix(UuidPrefixEnum::USER->value),
+            "uuid" => $this->userUuid,
             "username" => $this->createUserDto->email(),
             "secretPwd" => Hasher::getHashByString($this->createUserDto->secretPwd()),
 
@@ -56,5 +60,19 @@ final readonly class CreateUserService
             "firstSurname" => $this->createUserDto->firstSurname(),
         ]);
         $this->createUseWriterRepository->createUser($userEntity);
+    }
+
+    private function getCreatedUserDto(): CreatedUserDto
+    {
+        $userEntity = $this->sysUserReaderRepository->getUserByUserUuid(
+            $this->userUuid
+        );
+        return CreatedUserDto::fromPrimitives([
+            "uuid" => $userEntity->uuid,
+            "createdAt" => $userEntity->createdAt,
+            "createdBy" => $userEntity->createdBy,
+            "username" => $userEntity->username(),
+            "isEnabled" => $userEntity->isEnabled(),
+        ]);
     }
 }

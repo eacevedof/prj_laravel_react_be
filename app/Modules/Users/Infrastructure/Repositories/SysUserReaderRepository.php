@@ -22,4 +22,22 @@ final class SysUserReaderRepository extends AbstractRepository
         }
         return (int) $result[0]->id;
     }
+
+    public function getUserByUserUuid(string $userUuid): ?object
+    {
+        $sql = "
+        -- getUserByUsername
+        SELECT *
+        FROM sys_user
+        WHERE 1
+        AND uuid = '{$userUuid}'
+        ";
+        if (!$result = $this->query($sql)) {
+            return null;
+        }
+        $this->mapColumnToInt($result, "id")
+            ->mapColumnToInt($result, "isEnabled");
+        ;
+        return $result[0];
+    }
 }
