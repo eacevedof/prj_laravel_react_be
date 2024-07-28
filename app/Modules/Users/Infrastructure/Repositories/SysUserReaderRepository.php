@@ -18,9 +18,9 @@ final class SysUserReaderRepository extends AbstractRepository
         AND username = '{$username}'
         ";
         $this->logQuery($sql);
-        if (! $result = $this->query($sql)) {
+        if (!$result = $this->query($sql))
             return null;
-        }
+
         return (int) $result[0]->id;
     }
 
@@ -34,12 +34,11 @@ final class SysUserReaderRepository extends AbstractRepository
         AND uuid = '{$userUuid}'
         ";
         $this->logQuery($sql);
-        if (!$result = $this->query($sql)) {
+        if (!$result = $this->query($sql))
             return null;
-        }
+
         $this->mapColumnToInt($result, "id")
             ->mapColumnToInt($result, "isEnabled");
-        ;
         return $result[0];
     }
 }
