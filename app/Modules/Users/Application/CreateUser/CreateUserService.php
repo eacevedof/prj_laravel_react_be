@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Modules\Users\Application\CreateUser;
 
 use App\Modules\Shared\Domain\Enums\UuidPrefixEnum;
+use App\Modules\Shared\Domain\Enums\ValidatePatternEnum;
 use App\Modules\Shared\Infrastructure\Components\Hasher;
+use App\Modules\Shared\Infrastructure\Components\Matcher;
 use App\Modules\Shared\Infrastructure\Components\Time;
 use App\Modules\Shared\Infrastructure\Components\Uuid;
 use App\Modules\Users\Domain\Entities\UserEntity;
@@ -48,7 +50,7 @@ final readonly class CreateUserService
             CreateUserException::emptyEmail();
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!Matcher::doesStringMatchValidationPattern($email, ValidatePatternEnum::EMAIL)) {
             CreateUserException::invalidEmail($email);
         }
 
@@ -56,11 +58,16 @@ final readonly class CreateUserService
             CreateUserException::userAlreadyExistsByEmail($this->createUserDto->email());
         }
 
-        if (!$this->createUserDto->firstName()) {
-            CreateUserException::emptyFirstName();
+        if (!$firstName = $this->createUserDto->firstName()) {
+            CreateUserException::emptyInput("first_name");
+        }
+
+        if (!Matcher::doesStringMatchValidationPattern($firstName, ValidatePatternEnum::NAME)) {
+            CreateUserException::wrongFormat("first_name", "John Wick");
         }
 
     }
+
 
     private function createUserOrFail(): void
     {

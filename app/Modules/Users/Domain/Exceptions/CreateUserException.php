@@ -63,4 +63,20 @@ final class CreateUserException extends AbstractDomainException
             HttpResponseCodeEnum::BAD_REQUEST->value
         );
     }
+
+    public static function emptyInput(string $inputName): self
+    {
+        throw new self(
+            __("users-tr.empty-input-not-allowed", ["inputName" => $inputName]),
+            HttpResponseCodeEnum::BAD_REQUEST->value
+        );
+    }
+
+    public static function wrongFormat(string $inputName, string $example): self
+    {
+        throw new self(
+            __("users-tr.wrong-format", ["inputName" => $inputName, "example" => $example]),
+            HttpResponseCodeEnum::BAD_REQUEST->value
+        );
+    }
 }
