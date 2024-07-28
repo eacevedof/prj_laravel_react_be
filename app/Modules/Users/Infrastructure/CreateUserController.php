@@ -16,8 +16,7 @@ use Throwable;
 
 final readonly class CreateUserController
 {
-    use JsonResponseTrait;
-    use LogTrait;
+    use JsonResponseTrait,LogTrait;
 
     public function __construct(
         private CreateUserService $createUserService
