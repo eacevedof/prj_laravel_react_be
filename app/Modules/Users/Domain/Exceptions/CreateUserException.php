@@ -24,5 +24,20 @@ final class CreateUserException extends AbstractDomainException
             HttpResponseCodeEnum::INTERNAL_SERVER_ERROR->value
         );
     }
+    public static function emptyEmail(): self
+    {
+        throw new self(
+            __("users-tr.empty-email-not-allowed"),
+            HttpResponseCodeEnum::BAD_REQUEST->value
+        );
+    }
+
+    public static function invalidEmail(string $email): self
+    {
+        throw new self(
+            __("users-tr.invalid-email-format", ["email" => $email]),
+            HttpResponseCodeEnum::BAD_REQUEST->value
+        );
+    }
 
 }

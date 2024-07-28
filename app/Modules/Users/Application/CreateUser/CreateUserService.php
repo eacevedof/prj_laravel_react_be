@@ -36,9 +36,16 @@ final readonly class CreateUserService
 
     private function failIfWrongDto(): void
     {
-        if ($this->sysUserReaderRepository->getUserIdByUsername($this->createUserDto->email())) {
+        if (!$this->createUserDto->email())
+            CreateUserException::emptyEmail();
+
+        if (!filter_var($this->createUserDto->email(), FILTER_VALIDATE_EMAIL))
+            CreateUserException::invalidEmail();
+
+        if ($this->sysUserReaderRepository->getUserIdByUsername($this->createUserDto->email()))
             CreateUserException::userAlreadyExistsByEmail($this->createUserDto->email());
-        }
+
+
     }
 
     private function createUserOrFail(): void
