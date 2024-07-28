@@ -18,7 +18,7 @@ final class SysUserReaderRepository extends AbstractRepository
         WHERE 1
         AND username = '{$username}'
         ";
-        $this->logSql($sql);
+        $this->logQuery($sql);
         if (! $result = $this->query($sql)) {
             return null;
         }
@@ -34,7 +34,7 @@ final class SysUserReaderRepository extends AbstractRepository
         WHERE 1
         AND uuid = '{$userUuid}'
         ";
-        $this->logSql($sql);
+        $this->logQuery($sql);
         if (!$result = $this->query($sql)) {
             return null;
         }

@@ -62,7 +62,7 @@ abstract class AbstractRepository
         return $this;
     }
 
-    protected function logSql(string $sql, string $title=""): void
+    protected function logQuery(string $sql, string $title=""): void
     {
         $this->logSql($sql, $title);
     }
