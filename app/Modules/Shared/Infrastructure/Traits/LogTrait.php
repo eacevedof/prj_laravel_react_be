@@ -9,32 +9,40 @@ use PHPUnit\Event\Code\Throwable;
 
 trait LogTrait
 {
-    private function logDebug($mixed, $title=""): void
+    private function logDebug($mixed, $title = ""): void
     {
-        if ($title) $content[] = $title;
+        if ($title) {
+            $content[] = $title;
+        }
         $content[] = var_export($mixed, true);
         Log::channel("debug")->debug(implode("\n", $content));
     }
 
-    private function logError(mixed $mixed, $title="ERROR"): void
+    private function logError(mixed $mixed, $title = "ERROR"): void
     {
         $content = [];
-        if ($title) $content[] = $title;
+        if ($title) {
+            $content[] = $title;
+        }
         $content[] = var_export($mixed, true);
         Log::channel("error")->debug(implode("\n", $content));
     }
 
-    private function logSql(string $sql, $title=""): void
+    private function logSql(string $sql, $title = ""): void
     {
-        if ($title) $content[] = $title;
+        if ($title) {
+            $content[] = $title;
+        }
         $content[] = $sql;
         Log::channel("sql")->debug(implode("\n", $content));
     }
 
-    private function logException(Throwable $throwable, $title="ERROR"): void
+    private function logException(Throwable $throwable, $title = "ERROR"): void
     {
         $content = [];
-        if ($title) $content[] = $title;
+        if ($title) {
+            $content[] = $title;
+        }
         $content[] = $throwable->message();
         $content[] = $throwable->stackTrace();
         Log::channel("error")->debug(implode("\n", $content));

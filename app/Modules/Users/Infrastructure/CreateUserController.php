@@ -16,7 +16,8 @@ use Throwable;
 
 final readonly class CreateUserController
 {
-    use JsonResponseTrait, LogTrait;
+    use JsonResponseTrait;
+    use LogTrait;
 
     public function __construct(
         private CreateUserService $createUserService
@@ -32,14 +33,12 @@ final readonly class CreateUserController
                 ["message" => __("users-tr.user-successfully-created")],
                 HttpResponseCodeEnum::CREATED->value
             );
-        }
-        catch (CreateUserException $ex) {
+        } catch (CreateUserException $ex) {
             return $this->getJsonResponse(
                 ["message" => $ex->getMessage()],
                 $ex->getCode()
             );
-        }
-        catch (Throwable $ex) {
+        } catch (Throwable $ex) {
             $this->logException($ex);
             return $this->getJsonResponse(
                 ["message" => __("global-tr.some-unexpected-error-occurred")],
