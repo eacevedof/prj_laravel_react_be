@@ -32,7 +32,7 @@ final class CreateUseWriterRepository extends AbstractRepository
             "uuid" => $this->userEntity->uuid(),
             "username" => $this->userEntity->username(),
             "email" => $this->userEntity->email(),
-            "password" => $this->userEntity->secretPwd(),
+            "secret_pwd" => $this->userEntity->secretPwd(),
         ]);
         if (!$this->lastId) {
             CreateUserException::sysUserNotCreated($this->userEntity->username());
