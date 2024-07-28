@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Users\CreateUser\Domain\Exceptions;
+namespace App\Modules\Users\Domain\Exceptions;
 
 use App\Modules\Shared\Domain\Enums\HttpResponseCodeEnum;
 use App\Modules\Shared\Domain\Exceptions\AbstractDomainException;

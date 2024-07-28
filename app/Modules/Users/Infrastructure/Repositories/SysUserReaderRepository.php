@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Users\CreateUser\Infrastructure\Repositories;
+namespace App\Modules\Users\Infrastructure\Repositories;
 
 use App\Modules\Shared\Infrastructure\Repositories\AbstractRepository;
 

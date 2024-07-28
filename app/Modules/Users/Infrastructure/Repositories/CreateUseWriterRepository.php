@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Users\CreateUser\Infrastructure\Repositories;
+namespace App\Modules\Users\Infrastructure\Repositories;
 
 use App\Modules\Shared\Infrastructure\Repositories\AbstractRepository;
-use App\Modules\Users\CreateUser\Domain\Entities\UserEntity;
+use App\Modules\Users\Domain\Entities\UserEntity;
 
 final class CreateUseWriterRepository extends AbstractRepository
 {

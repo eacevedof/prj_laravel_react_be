@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Users\CreateUser\Domain\Entities;
+namespace App\Modules\Users\Domain\Entities;
 
 use App\Modules\Shared\Domain\Aggregate\AbstractAggregateRoot;
 

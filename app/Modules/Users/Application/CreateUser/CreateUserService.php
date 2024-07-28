@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Users\CreateUser\Application;
+namespace App\Modules\Users\Application\CreateUser;
 
-use App\Modules\Users\CreateUser\Infrastructure\Repositories\SysUserReaderRepository;
+use App\Modules\Users\CreateUser\Application\CreateUserException;
+use App\Modules\Users\CreateUser\Application\CreateUseWriterRepository;
+use App\Modules\Users\Infrastructure\Repositories\SysUserReaderRepository;
 
 final readonly class CreateUserService
 {

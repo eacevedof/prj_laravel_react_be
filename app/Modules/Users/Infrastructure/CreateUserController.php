@@ -2,20 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Users\CreateUser\Infrastructure;
+namespace App\Modules\Users\Infrastructure;
 
+use App\Modules\Shared\Domain\Enums\HttpResponseCodeEnum;
 use App\Modules\Shared\Infrastructure\Traits\JsonResponseTrait;
-use App\Modules\Users\CreateUser\Application\CreateUserDto;
-use App\Modules\Users\CreateUser\Application\CreateUserService;
+use App\Modules\Shared\Infrastructure\Traits\LogTrait;
+use App\Modules\Users\Application\CreateUser\CreateUserDto;
+use App\Modules\Users\Application\CreateUser\CreateUserService;
+use App\Modules\Users\Domain\Exceptions\CreateUserException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Modules\Users\CreateUser\Domain\Exceptions\CreateUserException;
-use \Throwable;
-use App\Modules\Shared\Domain\Enums\HttpResponseCodeEnum;
+use Throwable;
 
 final readonly class CreateUserController
 {
-    use JsonResponseTrait;
+    use JsonResponseTrait, LogTrait;
 
     public function __construct(
         private CreateUserService $createUserService
@@ -39,9 +40,10 @@ final readonly class CreateUserController
             );
         }
         catch (Throwable $ex) {
+            $this->logException($ex);
             return $this->getJsonResponse(
-                ["message" => $ex->getMessage()],
-                $ex->getCode()
+                ["message" => __("global-tr.some-unexpected-error-occurred")],
+                HttpResponseCodeEnum::INTERNAL_SERVER_ERROR->value
             );
         }
     }

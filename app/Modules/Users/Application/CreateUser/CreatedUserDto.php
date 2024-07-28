@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Users\CreateUser\Application;
+namespace App\Modules\Users\Application\CreateUser;
 
 final readonly class CreatedUserDto
 {
