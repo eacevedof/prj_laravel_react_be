@@ -40,4 +40,19 @@ final class CreateUserException extends AbstractDomainException
         );
     }
 
+    public static function emptySecretPwd(): self
+    {
+        throw new self(
+            __("users-tr.empty-secret-pwd-not-allowed"),
+            HttpResponseCodeEnum::BAD_REQUEST->value
+        );
+    }
+
+    public static function emptyFirstName(): self
+    {
+        throw new self(
+            __("users-tr.empty-first-name-not-allowed"),
+            HttpResponseCodeEnum::BAD_REQUEST->value
+        );
+    }
 }

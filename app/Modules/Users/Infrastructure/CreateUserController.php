@@ -36,19 +36,17 @@ final readonly class CreateUserController
                 "message" => __("users-tr.user-created-successfully"),
                 "data" => $createdUserDto->toArray(),
             ])->getAsJsonResponse();
-        }
-        catch (CreateUserException $ex) {
-            return $this->getJsonResponse(
-                ["message" => $ex->getMessage()],
-                $ex->getCode()
-            );
-        }
-        catch (Throwable $ex) {
+        } catch (CreateUserException $ex) {
+            return HttpJsonResponse::fromPrimitives([
+                "code" => $ex->getCode(),
+                "message" => $ex->getMessage(),
+            ])->getAsJsonResponse();
+        } catch (Throwable $ex) {
             $this->logException($ex);
-            return $this->getJsonResponse(
-                ["message" => __("global-tr.some-unexpected-error-occurred")],
-                HttpResponseCodeEnum::INTERNAL_SERVER_ERROR->value
-            );
+            return HttpJsonResponse::fromPrimitives([
+                "code" => $ex->getCode(),
+                "message" => __("global-tr.some-unexpected-error-occurred"),
+            ])->getAsJsonResponse();
         }
     }
 }
