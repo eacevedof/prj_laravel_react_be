@@ -13,6 +13,7 @@ use App\Modules\Users\Domain\Exceptions\CreateUserException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
+use App\Modules\Shared\Infrastructure\Components\HttpJsonResponse;
 
 final readonly class CreateUserController
 {
