@@ -28,24 +28,22 @@ final readonly class CreateUserController
     public function __invoke(Request $httpRequest): JsonResponse
     {
         try {
-            $createUserDto = CreateUserDto::fromHttpRequest($httpRequest);
-            //dd($createUserDto);
-            $createdUserDto = $this->createUserService->__invoke($createUserDto);
-            return $this->getJsonResponse(
-                [
-                    "status" => "success",
-                    "code" => HttpResponseCodeEnum::CREATED->value,
-                    "message" => __("users-tr.user-successfully-created"),
-                    "data" => $createdUserDto->toArray(),
-                ],
-                HttpResponseCodeEnum::CREATED->value
+            $createdUserDto = $this->createUserService->__invoke(
+                CreateUserDto::fromHttpRequest($httpRequest)
             );
-        } catch (CreateUserException $ex) {
+            return HttpJsonResponse::fromPrimitives([
+                "code" => HttpResponseCodeEnum::CREATED->value,
+                "message" => __("users-tr.user-successfully-created"),
+                "data" => $createdUserDto->toArray(),
+            ])->getAsJsonResponse();
+        }
+        catch (CreateUserException $ex) {
             return $this->getJsonResponse(
                 ["message" => $ex->getMessage()],
                 $ex->getCode()
             );
-        } catch (Throwable $ex) {
+        }
+        catch (Throwable $ex) {
             $this->logException($ex);
             return $this->getJsonResponse(
                 ["message" => __("global-tr.some-unexpected-error-occurred")],

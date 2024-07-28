@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Modules\Shared\Infrastructure\Components;
+use Illuminate\Http\JsonResponse;
 
 final class HttpJsonResponse
 {
@@ -67,4 +68,12 @@ final class HttpJsonResponse
         return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE);
     }
 
+    public function getAsJsonResponse(): JsonResponse
+    {
+        return new JsonResponse(
+            $this->toArray(),
+            $this->code()
+            , [], 0
+        );
+    }
 }
