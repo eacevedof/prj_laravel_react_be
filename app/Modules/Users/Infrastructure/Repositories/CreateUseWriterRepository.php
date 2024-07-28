@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Modules\Users\Infrastructure\Repositories;
 
-use App\Modules\Shared\Infrastructure\Components\Hasher;
 use App\Modules\Shared\Infrastructure\Repositories\AbstractRepository;
 use App\Modules\Users\Domain\Entities\UserEntity;
 use App\Modules\Users\Domain\Exceptions\CreateUserException;
@@ -24,7 +23,7 @@ final class CreateUseWriterRepository extends AbstractRepository
 
     private function createSysUserOrFail(): void
     {
-        $passwordHashed = Hasher::getHashByString($this->userEntity->password());
+        //$passwordHashed = Hasher::getHashByString($this->userEntity->secretPwd());
         $this->lastId = $this->command(self::SYS_USER_TABLE)->insertGetId([
             "created_platform" => $this->userEntity->createdPlatform(),
             "created_by" => $this->userEntity->createdBy(),
@@ -33,7 +32,7 @@ final class CreateUseWriterRepository extends AbstractRepository
             "uuid" => $this->userEntity->uuid(),
             "username" => $this->userEntity->username(),
             "email" => $this->userEntity->email(),
-            "password" => $passwordHashed,
+            "password" => $this->userEntity->secretPwd(),
         ]);
         if (!$this->lastId) {
             CreateUserException::sysUserNotCreated($this->userEntity->username());

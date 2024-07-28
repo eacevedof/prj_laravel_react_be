@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Modules\Users\Application\CreateUser;
 
 use App\Modules\Shared\Domain\Enums\PlatformEnum;
-use App\Modules\Shared\Domain\Enums\UuidPrefixEnum;
-use App\Modules\Shared\Infrastructure\Components\Uuid;
 use Illuminate\Http\Request;
 
 final readonly class CreateUserDto
@@ -44,10 +42,8 @@ final readonly class CreateUserDto
     public static function fromHttpRequest(Request $request): self
     {
         return new self([
-            "uuid" => Uuid::getUuidWithPrefix(UuidPrefixEnum::USER->value),
             "createdPlatform" => $request->input("createdPlatform"),
-            "createdBy" => $request->input("createdBy"),
-            "createdAt" => $request->input("createdAt"),
+            "createdBy" => "1",
             "username" => $request->input("username"),
             "secretPwd" => $request->input("secretPwd"),
             "secretPwdRepeat" => $request->input("secretPwdRepeat"),
