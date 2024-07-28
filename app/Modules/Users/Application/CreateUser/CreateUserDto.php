@@ -6,11 +6,12 @@ namespace App\Modules\Users\Application\CreateUser;
 
 use App\Modules\Shared\Domain\Enums\PlatformEnum;
 use Illuminate\Http\Request;
-
-;
+use App\Modules\Shared\Infrastructure\Components\Uuid;
+use App\Modules\Shared\Domain\Enums\UuidPrefixEnum;
 
 final readonly class CreateUserDto
 {
+    private string $uuid;
     private string $createdPlatform;
     private string $createdBy;
     private string $createdAt;
@@ -23,6 +24,7 @@ final readonly class CreateUserDto
 
     public function __construct(array $primitives)
     {
+        $this->uuid = trim((string) ($primitives["uuid"] ?? ""));
         $this->createdPlatform = trim((string) ($primitives["createdPlatform"] ?? PlatformEnum::UNKNOWN->value));
         $this->createdBy = trim((string) ($primitives["createdBy"] ?? ""));
         $this->createdAt = trim((string) ($primitives["createdAt"] ?? ""));
@@ -42,6 +44,7 @@ final readonly class CreateUserDto
     public static function fromHttpRequest(Request $request): self
     {
         return new self([
+            "uuid" => Uuid::getUuidWithPrefix(UuidPrefixEnum::USER->value),
             "createdPlatform" => $request->input("createdPlatform"),
             "createdBy" => $request->input("createdBy"),
             "createdAt" => $request->input("createdAt"),
@@ -52,6 +55,11 @@ final readonly class CreateUserDto
             "firstName" => $request->input("firstName"),
             "firstSurname" => $request->input("firstSurname"),
         ]);
+    }
+
+    public function uuid(): string
+    {
+        return $this->uuid;
     }
 
     public function createdPlatform(): string
