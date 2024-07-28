@@ -29,7 +29,7 @@ final readonly class CreateUserService
 
 
         if ($this->sysUserReaderRepository->existsByEmail($this->createdUserDto->email())) {
-            throw CreateUserException::userAlreadyExistsByEmail($this->createdUserDto->email());
+            CreateUserException::userAlreadyExistsByEmail($this->createdUserDto->email());
         }
     }
 }
