@@ -39,13 +39,13 @@ final class UserEntity extends AbstractAggregateRoot
         return new self(
             $primitives["createdPlatform"] ?? "",
             $primitives["createdBy"] ?? "",
-            $primitives["createdAt"] ?? "",
+            $primitives["createdAt"] ?? null,
             $primitives["updatedPlatform"] ?? "",
             $primitives["updatedBy"] ?? "",
-            $primitives["updatedAt"] ?? "",
+            $primitives["updatedAt"] ?? null,
             $primitives["deletedPlatform"] ?? "",
             $primitives["deletedBy"] ?? "",
-            $primitives["deletedAt"] ?? "",
+            $primitives["deletedAt"] ?? null,
             $primitives["isEnabled"] ?? 0,
             $primitives["id"] ?? 0,
             $primitives["uuid"] ?? null,
@@ -171,6 +171,5 @@ final class UserEntity extends AbstractAggregateRoot
     {
         return $this->secondSurname;
     }
-
 
 }
