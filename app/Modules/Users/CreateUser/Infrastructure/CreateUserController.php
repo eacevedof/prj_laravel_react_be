@@ -32,16 +32,16 @@ final readonly class CreateUserController
                 HttpResponseCodeEnum::CREATED->value
             );
         }
-        catch (CreateUserException $exception) {
+        catch (CreateUserException $ex) {
             return $this->getJsonResponse(
-                ["message" => $exception->getMessage()],
-                $exception->getCode()
+                ["message" => $ex->getMessage()],
+                $ex->getCode()
             );
         }
-        catch (Throwable $exception) {
+        catch (Throwable $ex) {
             return $this->getJsonResponse(
-                ["message" => $exception->getMessage()],
-                $exception->getCode()
+                ["message" => $ex->getMessage()],
+                $ex->getCode()
             );
         }
     }
