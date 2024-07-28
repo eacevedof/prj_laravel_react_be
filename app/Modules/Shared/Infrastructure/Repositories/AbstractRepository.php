@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Shared\Infrastructure\Repositories;
 
-use Illuminate\Support\Facades\DB;
 use App\Modules\Shared\Infrastructure\Traits\LogTrait;
+use Illuminate\Support\Facades\DB;
 
 abstract class AbstractRepository
 {
@@ -62,7 +62,7 @@ abstract class AbstractRepository
         return $this;
     }
 
-    protected function logQuery(string $sql, string $title=""): void
+    protected function logQuery(string $sql, string $title = ""): void
     {
         $this->logSql($sql, $title);
     }

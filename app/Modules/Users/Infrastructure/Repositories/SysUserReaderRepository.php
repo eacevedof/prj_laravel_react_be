@@ -8,7 +8,6 @@ use App\Modules\Shared\Infrastructure\Repositories\AbstractRepository;
 
 final class SysUserReaderRepository extends AbstractRepository
 {
-
     public function getUserIdByUsername(string $username): ?int
     {
         $sql = "
