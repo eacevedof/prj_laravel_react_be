@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Modules\Shared\Infrastructure\Components;
+
 use Illuminate\Http\JsonResponse;
 
 final class HttpJsonResponse
@@ -17,15 +20,6 @@ final class HttpJsonResponse
         $this->status = $this->getStatusByCode();
         $this->message = (string)($primitives["message"] ?? "");
         $this->data = $primitives["data"] ?? [];
-    }
-
-    private function getStatusByCode(): string
-    {
-        $responseCode = (string) $this->code;
-        $two = "2";
-        if (substr($responseCode, 0, strlen($two)) === $two)
-            return "success";
-        return "error";
     }
 
     public static function fromPrimitives(array $primitives): self
@@ -72,8 +66,19 @@ final class HttpJsonResponse
     {
         return new JsonResponse(
             $this->toArray(),
-            $this->code()
-            , [], 0
+            $this->code(),
+            [],
+            0
         );
+    }
+
+    private function getStatusByCode(): string
+    {
+        $responseCode = (string) $this->code;
+        $two = "2";
+        if (mb_substr($responseCode, 0, mb_strlen($two)) === $two) {
+            return "success";
+        }
+        return "error";
     }
 }

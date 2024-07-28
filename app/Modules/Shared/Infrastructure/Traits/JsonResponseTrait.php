@@ -21,8 +21,9 @@ trait JsonResponseTrait
     {
         return new JsonResponse(
             $httpJsonResponse->toArray(),
-            $httpJsonResponse->code()
-            , [], 0
+            $httpJsonResponse->code(),
+            [],
+            0
         );
     }
 }

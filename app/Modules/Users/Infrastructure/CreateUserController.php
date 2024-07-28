@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Users\Infrastructure;
 
 use App\Modules\Shared\Domain\Enums\HttpResponseCodeEnum;
+use App\Modules\Shared\Infrastructure\Components\HttpJsonResponse;
 use App\Modules\Shared\Infrastructure\Traits\JsonResponseTrait;
 use App\Modules\Shared\Infrastructure\Traits\LogTrait;
 use App\Modules\Users\Application\CreateUser\CreateUserDto;
@@ -13,7 +14,6 @@ use App\Modules\Users\Domain\Exceptions\CreateUserException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
-use App\Modules\Shared\Infrastructure\Components\HttpJsonResponse;
 
 final readonly class CreateUserController
 {
@@ -33,7 +33,7 @@ final readonly class CreateUserController
             );
             return HttpJsonResponse::fromPrimitives([
                 "code" => HttpResponseCodeEnum::CREATED->value,
-                "message" => __("users-tr.user-successfully-created"),
+                "message" => __("users-tr.user-created-successfully"),
                 "data" => $createdUserDto->toArray(),
             ])->getAsJsonResponse();
         }
