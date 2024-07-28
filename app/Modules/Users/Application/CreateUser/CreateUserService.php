@@ -69,8 +69,8 @@ final readonly class CreateUserService
         );
         return CreatedUserDto::fromPrimitives([
             "uuid" => $userEntity->uuid,
-            "createdAt" => $userEntity->createdAt,
-            "createdBy" => $userEntity->createdBy,
+            "createdAt" => $userEntity->created_at,
+            "createdBy" => $userEntity->created_by,
             "username" => $userEntity->username,
             "isEnabled" => $userEntity->is_enabled,
         ]);

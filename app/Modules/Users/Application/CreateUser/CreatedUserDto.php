@@ -31,7 +31,7 @@ final readonly class CreatedUserDto
         return [
             "uuid" => $this->uuid,
             "createdAt" => $this->createdAt,
-            "createdBy" => $this->created,
+            "createdBy" => $this->createdBy,
             "username" => $this->username,
             "isEnabled" => $this->isEnabled,
         ];
