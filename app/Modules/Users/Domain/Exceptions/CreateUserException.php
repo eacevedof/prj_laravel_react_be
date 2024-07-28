@@ -55,4 +55,12 @@ final class CreateUserException extends AbstractDomainException
             HttpResponseCodeEnum::BAD_REQUEST->value
         );
     }
+
+    public static function passwordsDoNotMatch(): self
+    {
+        throw new self(
+            __("users-tr.passwords-do-not-match"),
+            HttpResponseCodeEnum::BAD_REQUEST->value
+        );
+    }
 }

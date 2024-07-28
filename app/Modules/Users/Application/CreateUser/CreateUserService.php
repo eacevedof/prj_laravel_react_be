@@ -28,14 +28,22 @@ final readonly class CreateUserService
     {
         $this->createUserDto = $createUserDto;
 
-        $this->failIfWrongDto();
+        $this->failIfWrongInput();
         $this->createUserOrFail();
 
         return $this->getCreatedUserDto();
     }
 
-    private function failIfWrongDto(): void
+    private function failIfWrongInput(): void
     {
+        if (!$this->createUserDto->secretPwd()) {
+            CreateUserException::emptySecretPwd();
+        }
+
+        if ($this->createUserDto->secretPwd() !== $this->createUserDto->secretPwdRepeat()) {
+            CreateUserException::passwordsDoNotMatch();
+        }
+
         if (!$email = $this->createUserDto->email()) {
             CreateUserException::emptyEmail();
         }
@@ -46,10 +54,6 @@ final readonly class CreateUserService
 
         if ($this->sysUserReaderRepository->getUserIdByUsername($this->createUserDto->email())) {
             CreateUserException::userAlreadyExistsByEmail($this->createUserDto->email());
-        }
-
-        if (!$this->createUserDto->secretPwd()) {
-            CreateUserException::emptySecretPwd();
         }
 
         if (!$this->createUserDto->firstName()) {
