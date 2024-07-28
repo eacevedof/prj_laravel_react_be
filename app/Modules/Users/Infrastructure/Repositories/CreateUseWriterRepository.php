@@ -44,8 +44,8 @@ final class CreateUseWriterRepository extends AbstractRepository
         $this->command(self::APP_USER_TABLE)->insert([
             "sys_user_id" => $this->lastId,
             "first_name" => $this->userEntity->firstName(),
-            "last_name" => $this->userEntity->lastName(),
-            "phone" => $this->userEntity->phone()
+            "first_surname" => $this->userEntity->firstSurname(),
+            "mobile_number" => $this->userEntity->mobileNumber()
         ]);
     }
 }

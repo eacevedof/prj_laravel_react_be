@@ -32,6 +32,8 @@ final readonly class CreateUserController
             $createdUserDto = $this->createUserService->__invoke($createUserDto);
             return $this->getJsonResponse(
                 [
+                    "status" => "success",
+                    "code" => HttpResponseCodeEnum::CREATED->value,
                     "message" => __("users-tr.user-successfully-created"),
                     "data" => $createdUserDto->toArray(),
                 ],

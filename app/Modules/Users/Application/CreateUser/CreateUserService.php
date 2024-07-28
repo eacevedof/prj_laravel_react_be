@@ -71,8 +71,8 @@ final readonly class CreateUserService
             "uuid" => $userEntity->uuid,
             "createdAt" => $userEntity->createdAt,
             "createdBy" => $userEntity->createdBy,
-            "username" => $userEntity->username(),
-            "isEnabled" => $userEntity->isEnabled(),
+            "username" => $userEntity->username,
+            "isEnabled" => $userEntity->is_enabled,
         ]);
     }
 }
