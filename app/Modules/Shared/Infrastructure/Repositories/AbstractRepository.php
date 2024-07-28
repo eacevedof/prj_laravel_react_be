@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 abstract class AbstractRepository
 {
+    protected int $lastId;
     protected function query(string $sql): array
     {
         return DB::select($sql);

@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Users\Application\CreateUser;
 
-use App\Modules\Users\Infrastructure\Repositories\CreateUseWriterRepository;
 use App\Modules\Users\Domain\Exceptions\CreateUserException;
+use App\Modules\Users\Infrastructure\Repositories\CreateUseWriterRepository;
 use App\Modules\Users\Infrastructure\Repositories\SysUserReaderRepository;
-
 
 final readonly class CreateUserService
 {
@@ -24,6 +23,7 @@ final readonly class CreateUserService
     ): CreatedUserDto {
         $this->createUserDto = $createUserDto;
         $this->failIfWrongDto();
+
         return CreatedUserDto::fromPrimitives([]);
     }
 
@@ -32,5 +32,12 @@ final readonly class CreateUserService
         if ($this->sysUserReaderRepository->getUserIdByUsername($this->createUserDto->email())) {
             CreateUserException::userAlreadyExistsByEmail($this->createUserDto->email());
         }
+    }
+
+    private function createUser(): void
+    {
+        $userEntity = UserEntity::fromPrimitives([
+        ]);
+        $this->createUseWriterRepository->createUser($userEntity);
     }
 }
