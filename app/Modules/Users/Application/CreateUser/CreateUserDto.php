@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Modules\Users\Application\CreateUser;
 
 use App\Modules\Shared\Domain\Enums\PlatformEnum;
-use Illuminate\Http\Request;
-use App\Modules\Shared\Infrastructure\Components\Uuid;
 use App\Modules\Shared\Domain\Enums\UuidPrefixEnum;
+use App\Modules\Shared\Infrastructure\Components\Uuid;
+use Illuminate\Http\Request;
 
 final readonly class CreateUserDto
 {

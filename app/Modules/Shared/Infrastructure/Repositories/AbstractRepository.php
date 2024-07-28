@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 abstract class AbstractRepository
 {
     protected int $lastId;
+
+    public function getDatetimeNow(): string
+    {
+        return date("Y-m-d H:i:s");
+    }
     protected function query(string $sql): array
     {
         return DB::select($sql);

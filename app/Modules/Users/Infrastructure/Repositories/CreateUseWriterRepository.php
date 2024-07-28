@@ -22,10 +22,15 @@ final class CreateUseWriterRepository extends AbstractRepository
     {
 
         $this->lastId = $this->command("sys_user")->insertGetId([
-            "user_id" => $this->userEntity->getUserId(),
-            "username" => $this->->getUsername(),
-            "password" => $sysUserEntity->getPassword(),
-            "created_at" => now(),
+            "created_platform" => $this->userEntity->createdPlatform(),
+            "created_by" => $this->userEntity->createdBy(),
+            "created_at" => $this->getDatetimeNow(),
+
+            "uuid" => $this->userEntity->uuid(),
+            "username" => $this->userEntity->username(),
+            "email" => $this->userEntity->email(),
+            "password" => $this->userEntity->password(),
+
         ]);
     }
 
