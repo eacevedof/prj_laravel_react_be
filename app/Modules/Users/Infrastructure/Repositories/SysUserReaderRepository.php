@@ -17,7 +17,7 @@ final class SysUserReaderRepository extends AbstractRepository
         WHERE 1
         AND username = '{$username}'
         ";
-        if ( ! $result = $this->query($sql)) {
+        if (! $result = $this->query($sql)) {
             return null;
         }
         return (int) $result[0]->id;

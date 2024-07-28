@@ -6,9 +6,9 @@ namespace App\Modules\Shared\Infrastructure\Components;
 
 use Illuminate\Support\Facades\Hash as IlluminateHash;
 
-final class Hash
+final class Hasher
 {
-    public static function getHashResult(string $string): string
+    public static function getHashByString(string $string): string
     {
         /*
         use Illuminate/Hashing/ArgonHasher::make()

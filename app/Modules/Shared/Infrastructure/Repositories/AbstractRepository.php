@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 abstract class AbstractRepository
 {
-    protected int $lastId;
+    protected ?int $lastId = null;
 
     public function getDatetimeNow(): string
     {
@@ -26,7 +26,7 @@ abstract class AbstractRepository
 
     protected function getIntegersSqlIn(array $entityIds): string
     {
-        if ( ! $entityIds) {
+        if (! $entityIds) {
             return "";
         }
         $entityIds = array_unique($entityIds);
@@ -37,7 +37,7 @@ abstract class AbstractRepository
 
     protected function getStringsSqlIn(array $entityUuids): string
     {
-        if ( ! $entityUuids) {
+        if (! $entityUuids) {
             return "";
         }
         $entityUuids = array_unique($entityUuids);

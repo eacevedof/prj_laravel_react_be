@@ -16,4 +16,13 @@ final class CreateUserException extends AbstractDomainException
             HttpResponseCodeEnum::BAD_REQUEST->value
         );
     }
+
+    public static function sysUserNotCreated(string $username): self
+    {
+        throw new self(
+            __("users-tr.sys-user-not-created", ["username" => $username]),
+            HttpResponseCodeEnum::INTERNAL_SERVER_ERROR->value
+        );
+    }
+
 }
