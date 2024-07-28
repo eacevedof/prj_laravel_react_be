@@ -39,17 +39,17 @@ final readonly class CreateUserDto
         return new self($primitives);
     }
 
-    public static function fromHttpRequest(Request $request): self
+    public static function fromHttpRequest(Request $httpRequest): self
     {
         return new self([
-            "createdPlatform" => $request->input("createdPlatform"),
+            "createdPlatform" => $httpRequest->input("createdPlatform"),
             "createdBy" => "1",
-            "username" => $request->input("username"),
-            "secretPwd" => $request->input("secretPwd"),
-            "secretPwdRepeat" => $request->input("secretPwdRepeat"),
-            "email" => $request->input("email"),
-            "firstName" => $request->input("firstName"),
-            "firstSurname" => $request->input("firstSurname"),
+            "username" => $httpRequest->input("username"),
+            "secretPwd" => $httpRequest->input("password"),
+            "secretPwdRepeat" => $httpRequest->input("password_repeat"),
+            "email" => $httpRequest->input("email"),
+            "firstName" => $httpRequest->input("firstName"),
+            "firstSurname" => $httpRequest->input("firstSurname"),
         ]);
     }
 
